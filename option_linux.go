@@ -64,6 +64,15 @@ func LnxSetScanResponseData(c *cmd.LESetScanResponseData) Option {
 	}
 }
 
+// LnxSetScanParams sets the scan parameters sent on 
+// This option can be used with NewDevice or Option on Linux implementation.
+func LnxSetScanParams(c *cmd.LESetScanParameters) Option {
+	return func(d Device) error {
+		d.(*device).scanParam = c
+		return nil
+	}
+}
+
 // LnxSetAdvertisingParameters sets the advertising parameters to the HCI device.
 // This option can be used with NewDevice or Option on Linux implementation.
 func LnxSetAdvertisingParameters(c *cmd.LESetAdvertisingParameters) Option {

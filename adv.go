@@ -1972,6 +1972,7 @@ type Advertisement struct {
 	OverflowService  []UUID
 	TxPowerLevel     int
 	Connectable      bool
+	Scannable        bool
 	SolicitedService []UUID
 	Raw              []byte
 }

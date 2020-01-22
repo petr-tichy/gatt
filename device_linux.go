@@ -96,6 +96,7 @@ func (d *device) Init(f func(Device, State)) error {
 		a := &Advertisement{}
 		a.unmarshall(pd.Data)
 		a.Connectable = pd.Connectable
+		a.Scannable = pd.Scannable
 		p := &peripheral{pd: pd, d: d}
 		if d.peripheralDiscovered != nil {
 			pd.Name = a.LocalName
@@ -191,6 +192,9 @@ func (d *device) StopAdvertising() error {
 
 func (d *device) Scan(ss []UUID, dup bool) {
 	// TODO: filter
+	if d.scanParam != nil {
+		d.hci.SendRawCommand(d.scanParam)
+	}
 	d.hci.SetScanEnable(true, dup)
 }
 
